@@ -26,3 +26,12 @@ def read_input_one_by_one(file_name, unit='line'):
             for line in f.readlines():
                 for char in line:
                     yield char
+
+def flatten(deep_list):
+    flat_list = []
+    for el in deep_list:
+        if isinstance(el, list):
+            flat_list.extend(flatten(el))
+        else:
+            flat_list.append(el)
+    return flat_list
