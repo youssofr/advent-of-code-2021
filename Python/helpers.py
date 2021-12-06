@@ -1,3 +1,5 @@
+import re
+
 file_name_prefix = '../Inputs/'
 
 def read_input_at_once(file_name, unit='line'):
@@ -9,8 +11,14 @@ def read_input_at_once(file_name, unit='line'):
     with open(file_name_prefix + file_name) as f:
         if unit == 'line':
             return f.readlines()
-        if unit == 'char':
+        elif unit == 'char':
             return [[char for char in line] for line in f.readlines()]
+        elif unit == 'int':
+            numeric = re.compile("[0-9.]+")
+            return [list(map(int, re.findall(numeric, line))) for line in f.readlines()]
+        elif unit == 'float':
+            numeric = re.compile("[0-9.]+")
+            return [list(map(float, re.findall(numeric, line))) for line in f.readlines()]
 
 def read_input_one_by_one(file_name, unit='line'):
     # handle auto name conversion
@@ -26,6 +34,16 @@ def read_input_one_by_one(file_name, unit='line'):
             for line in f.readlines():
                 for char in line:
                     yield char
+        elif unit == 'int':
+            numeric = re.compile("[0-9.]+")
+            for line in f.readlines():
+                for num in list(map(int, re.findall(numeric, line))):
+                    yield num
+        elif unit == 'float':
+            numeric = re.compile("[0-9.]+")
+            for line in f.readlines():
+                for num in list(map(float, re.findall(numeric, line))):
+                    yield num
 
 def flatten(deep_list):
     flat_list = []
