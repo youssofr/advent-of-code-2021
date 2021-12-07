@@ -8,33 +8,25 @@ string file_name_prefix = "../Inputs/";
 
 int main(){
 
-    // READ DATA FROM FILE TO ARRAY 
     // file srteam to handle input from the file
     ifstream inputs_file;
     inputs_file.open(file_name_prefix.append("Day 1: Sonar Sweep - Part One.txt"));
 
-    // string to read in inputs
-    int depths[2000];
-
-    int n_lines = 0;
+    // int array to save last and current depths to compare as file is read
+    int depths[2];
+    int answer = 0;
     // read from file stream object to string
-    for (int i = 0; i < 2000 && inputs_file; i++){
-        inputs_file >> depths[i];
-        n_lines++;
+    int i = 0;
+    while (inputs_file){
+        inputs_file >> depths[i%2];
+        if (i > 0 && depths[i%2] > depths[(i-1)%2])
+            answer++;
+        i++;
     }
     inputs_file.close();
-
-
-    // CACULATE ANSWER
-    // problem parameter
-    int answer = 0;
-
-    for (int i = 1; i < 2000; i++){
-        if (depths[i] > depths[i-1])
-            answer++;
-    }
     
     cout << answer << "\n";
+
 
     return 0;
 }
