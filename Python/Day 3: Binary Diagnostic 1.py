@@ -15,33 +15,11 @@ report = report.astype(int)
 gamma_e = 1/len(report)/2   # an epsilon to add to the average 
                             # as numpy rounds to nearest even value
 gamma = (report.mean(axis = 0) + gamma_e).round(decimals = 0).astype(int)
-o2 = report.copy()
-co2 = report.copy()
-
-# use gamma to get oxygen rating
-for i in range(len(o2[0])):
-    o2_e = 1/len(o2)/2
-    o2_mask = (o2[:, i].mean() + o2_e).round(decimals = 0).astype(int)
-    co2_e = 1/len(o2)/2
-    co2_mask = (co2[:, i].mean() + co2_e).round(decimals = 0).astype(int)
-    if len(o2) != 1:
-        o2 = o2[o2[:, i] == o2_mask, :]
-    if len(co2) != 1:
-        co2 = co2[co2[:, i] != co2_mask, :]
-    # print(i, o2_mask, o2, co2_mask, co2, sep='\n')
-    if len(o2) == len(co2) == 1:
-        break
-
-o2 = o2.squeeze()
-co2 = co2.squeeze()
 
 # convert gamma to decimal system
 gamma = deci_from_bin(gamma)
-o2 = deci_from_bin(o2)
-co2 = deci_from_bin(co2)
 
 # epsilon is the one complement of gamma
 epsilon = 2**(report.shape[1]) - 1 - gamma
 
 print(gamma * epsilon)
-print(o2 * co2)
