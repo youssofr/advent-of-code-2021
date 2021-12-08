@@ -5,7 +5,7 @@ file_name_prefix = '../Inputs/'
 def read_input_at_once(file_name, unit='line'):
     # handle auto name conversion
     if file_name[-3:] == '.py':
-        file_name = file_name[:-3] +'.txt'
+        file_name = file_name[:-5] +'.txt'
     
     # open file and return line seperated data points
     with open(file_name_prefix + file_name) as f:

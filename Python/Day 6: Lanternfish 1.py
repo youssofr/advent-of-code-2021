@@ -1,10 +1,10 @@
 import numpy as np
-from math import ceil, floor
+from math import ceil
 from time import time
 
 import helpers
 
-init_state = np.array(helpers.read_input_at_once(__file__, 'int')).squeeze()
+init_state = np.array([3,4,3,1,2]) #helpers.read_input_at_once(__file__, 'int')).squeeze()
 
 # problem parameters
 cycle = 6
@@ -44,14 +44,25 @@ def recur_solve(state, n):
     return population
 
 def numer_solve(state, n):
-    pass
+    
+    population = state.size * 2**(n//(cycle+1))
+    population += np.where(state < n % (cycle+1), 1, 0).sum()
+    
+    for unlived in range(1, n//(cycle+1)+1):
+        population -= np.where(state >= 2*unlived % (cycle+1), 1, 0).sum()
+        
+    return population
 
-observation_period = 150
+observation_period = 20
 
-timer = time()
-print(tree_solve(init_state.copy(), observation_period), end='')
-print(' in time {}'.format(time()-timer))
+# timer = time()
+# print(tree_solve(init_state.copy(), observation_period), end='')
+# print(' in {} sec'.format(time()-timer))
 
 timer = time()
 print(recur_solve(init_state.copy(), observation_period), end='')
-print(' in time {}'.format(time()-timer))
+print(' in {} sec'.format(time()-timer))
+
+timer = time()
+print(numer_solve(init_state.copy(), observation_period), end='')
+print(' in {} sec'.format(time()-timer))

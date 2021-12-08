@@ -20,7 +20,7 @@ count = 0
 
 # walk on a horizontal or vertical line
 def walk_over(x, y1, y2, var_dim='1'):
-    '''docstring'''
+    '''Placeholder docstring'''
     global count
     global clouded_points
     if y2 >= y1:
