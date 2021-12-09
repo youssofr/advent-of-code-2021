@@ -33,6 +33,4 @@ for t, s in zip(target_indices, source_indices):
 
 answer = low_points.sum() + low_points.size
 
-print(low_points.sum())
-print(low_points.size)
 print(answer)
