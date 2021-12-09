@@ -19,6 +19,8 @@ def read_input_at_once(file_name, unit='line'):
         elif unit == 'float':
             numeric = re.compile("[0-9.]+")
             return [list(map(float, re.findall(numeric, line))) for line in f.readlines()]
+        else:
+            raise ValueError('Reading unit not recognized, got ' + unit)
 
 def read_input_one_by_one(file_name, unit='line'):
     # handle auto name conversion
@@ -44,6 +46,8 @@ def read_input_one_by_one(file_name, unit='line'):
             for line in f.readlines():
                 for num in list(map(float, re.findall(numeric, line))):
                     yield num
+        else:
+            raise ValueError('Reading unit not recognized, got ' + unit)
 
 def flatten(deep_list):
     flat_list = []
