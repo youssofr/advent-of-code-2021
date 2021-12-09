@@ -57,3 +57,9 @@ def flatten(deep_list):
         else:
             flat_list.append(el)
     return flat_list
+
+def multiply(*args):
+    product = 1
+    for arg in args:
+        product *= arg
+    return product
