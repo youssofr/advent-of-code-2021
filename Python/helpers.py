@@ -12,7 +12,7 @@ def read_input_at_once(file_name, unit='line'):
         if unit == 'line':
             return f.readlines()
         elif unit == 'char':
-            return [[char for char in line] for line in f.readlines()]
+            return [[char for char in line][:-1] for line in f.readlines()]
         elif unit == 'int':
             numeric = re.compile("[0-9.]+")
             return [list(map(int, re.findall(numeric, line))) for line in f.readlines()]
