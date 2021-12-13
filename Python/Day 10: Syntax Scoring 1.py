@@ -18,7 +18,7 @@ brak_score = {')' : 3,
                 '>' : 25137
 }
 
-brack_stack = []
+brack_stack = [] # using lists as stacks https://docs.python.org/3/tutorial/datastructures.html#using-lists-as-stacks
 score = 0
 
 for line in lines:

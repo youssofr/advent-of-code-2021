@@ -21,7 +21,7 @@ brak_score = {  '(' : 1,
 scores = []
 
 for line in lines:
-    brack_stack = []
+    brack_stack = [] # using lists as stacks https://docs.python.org/3/tutorial/datastructures.html#using-lists-as-stacks
     curropt = False
     for char in line:
         if brak_state[char] == 'opening':
